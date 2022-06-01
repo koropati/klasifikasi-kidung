@@ -8,7 +8,11 @@ Core System Classification Traditional Balinese Song
 - activate your new env using command line : ```myenv\Scripts\activate```
 - install depedency / library with this command line : ```pip install -r req.txt```
 
-- COPY ALL AUDIO data to folder ```audio```
+- Download Audio Dataset in Google Drive Link https://drive.google.com/drive/folders/1Crglr-xmXMMrL2mAEzydWRmM_BdvaZCq?usp=sharing 
+- Download ```DatasetBaru.zip```
+- COPY ALL AUDIO data from ```DatasetBaru``` to folder ```audio```
+
+AND YOU CAN RUN ALL Script, Following step by steep with number of instruction below:
 
 1. Copying all audio to folder dataset with Auto create class folder.
     ```python .\create_folder_dataset.py -i .\audio\ -o .\dataset\```
