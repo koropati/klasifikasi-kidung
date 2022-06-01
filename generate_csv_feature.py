@@ -1,5 +1,6 @@
 import argparse
 import os
+from pydoc import classname
 import shutil
 import cv2
 
@@ -24,11 +25,14 @@ def main():
 def generateCSVFeature(src, dst, methodFeature):
     print("Generate Feature...")
     nameFileOut = dst + os.sep + "dataset_" + methodFeature + ".csv"
+    nameFileLabelOut = dst + os.sep + "dataset_" + methodFeature + "_label.csv"
     if not os.path.exists(dst):
         os.makedirs(dst)
 
     if os.path.exists(nameFileOut):
         os.remove(nameFileOut)
+    if os.path.exists(nameFileLabelOut):
+        os.remove(nameFileLabelOut)
 
     for root, dirs, files in os.walk(src):
         for name in files:
@@ -39,7 +43,6 @@ def generateCSVFeature(src, dst, methodFeature):
             # img_in = cv2.imread(fullPathIn)
             img_gray = cv2.imread(fullPathIn, cv2.IMREAD_GRAYSCALE)
 
-            vectorFeature.extend(classImage)
             if methodFeature == 'hog':
                 myHOG = HOG(img_gray, 16, 8)
                 hogVector, _ = myHOG.extract()
@@ -57,6 +60,7 @@ def generateCSVFeature(src, dst, methodFeature):
                 vectorFeature.extend(lbpVector)
             print("Processed : {}".format(fullPathIn))
             appendListAsRow(nameFileOut, vectorFeature)
+            appendListAsRow(nameFileLabelOut, [classImage])
     print("Done!")
 
 if __name__ == '__main__':
