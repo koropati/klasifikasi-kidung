@@ -10,7 +10,9 @@ Core System Classification Traditional Balinese Song
 
 - Download Audio Dataset in Google Drive Link https://drive.google.com/drive/folders/1Crglr-xmXMMrL2mAEzydWRmM_BdvaZCq?usp=sharing 
 - Download ```DatasetBaru.zip```
-- COPY ALL AUDIO data from ```DatasetBaru``` to folder ```audio```
+- Extract zip file ```DatasetBaru.zip```
+- Create new folder called ```audio```
+- COPY ALL AUDIO data from folder ```DatasetBaru``` to folder ```audio```
 
 AND YOU CAN RUN ALL Script, Following step by steep with number of instruction below:
 
