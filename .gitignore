@@ -1,0 +1,6 @@
+audio/*
+dataset/*
+dataset-generate-feature/*
+dataset-spectogram/*
+lib/__pycache__
+myenv
