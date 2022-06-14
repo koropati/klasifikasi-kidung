@@ -2,5 +2,6 @@ audio/*
 dataset/*
 dataset-generate-feature/*
 dataset-spectogram/*
+model-kfold-validation/*
 lib/__pycache__
 myenv

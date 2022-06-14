@@ -65,10 +65,10 @@ class LBP(object):
         hist_img3 = cv2.calcHist([img3], [0], None, [256], [0, 256])
         hist_img4 = cv2.calcHist([img4], [0], None, [256], [0, 256])
 
-        x1 = np.asarray(self.reshape_row(hist_img1/sum(sum(hist_img1))))
-        x2 = np.asarray(self.reshape_row(hist_img2/sum(sum(hist_img2))))
-        x3 = np.asarray(self.reshape_row(hist_img3/sum(sum(hist_img3))))
-        x4 = np.asarray(self.reshape_row(hist_img4/sum(sum(hist_img4))))
+        x1 = list(self.reshape_row(hist_img1/sum(sum(hist_img1))))
+        x2 = list(self.reshape_row(hist_img2/sum(sum(hist_img2))))
+        x3 = list(self.reshape_row(hist_img3/sum(sum(hist_img3))))
+        x4 = list(self.reshape_row(hist_img4/sum(sum(hist_img4))))
         feature_vector = []
         feature_vector.extend(x1)
         feature_vector.extend(x2)

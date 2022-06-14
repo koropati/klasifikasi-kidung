@@ -6,7 +6,9 @@ import cv2
 
 from lib.hog import HOG
 from lib.lbp import LBP
+from lib.lbp2 import LBP2
 from lib.csv import appendListAsRow
+from skimage.feature import hog
 
 
 def main():
@@ -16,7 +18,7 @@ def main():
     ap.add_argument('-o', '--outputPath', required=True,
                     help='Output Folder Dataset CSV')
     ap.add_argument('-m', '--methodFeature', required=True,
-                    help='Metode of extracting Feature ex: (hog, lbp, combine)')
+                    help='Metode of extracting Feature ex: (hog, hog2, lbp, combine)')
     args = ap.parse_args()
 
     generateCSVFeature(args.inputPath, args.outputPath, args.methodFeature)
@@ -47,8 +49,21 @@ def generateCSVFeature(src, dst, methodFeature):
                 myHOG = HOG(img_gray, 16, 8)
                 hogVector, _ = myHOG.extract()
                 vectorFeature.extend(hogVector)
+            elif methodFeature == 'hog2':
+                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(16,16), cells_per_block=(1,1), visualize=False, feature_vector=True)
+                vectorFeature.extend(list(myHOG2))
             elif methodFeature == 'lbp':
                 myLBP = LBP(img_gray)
+                lbpVector = myLBP.extract()
+                vectorFeature.extend(lbpVector)
+            elif methodFeature == 'lbp2':
+                myLBP = LBP2(img_gray)
+                lbpVector = myLBP.extract()
+                vectorFeature.extend(lbpVector)
+            elif methodFeature == 'combine2':
+                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(16,16), cells_per_block=(1,1), visualize=False, feature_vector=True)
+                vectorFeature.extend(list(myHOG2))
+                myLBP = LBP2(img_gray)
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
             else:

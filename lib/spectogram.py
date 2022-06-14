@@ -10,13 +10,16 @@ class CreateSpectogram(object):
         self.imagePath = imagePath
 
     def create(self):
+        myDPI = 90
+        widthInch = (576/myDPI)
+        heightInch = (432/myDPI)
         librosa.load(self.audioPath, sr=None)
         X = librosa.stft(self.x)
         Xdb = librosa.amplitude_to_db(abs(X))
-        fig, ax = plt.subplots(1)
+        fig, ax = plt.subplots(1, figsize=(widthInch, heightInch))
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
         ax.axis('off')
         librosa.display.specshow(Xdb, sr=self.sr)
         ax.axis('off')
-        fig.savefig(self.imagePath, dpi=300, frameon='false')
+        fig.savefig(self.imagePath, dpi=myDPI, frameon='false')
         plt.close()
