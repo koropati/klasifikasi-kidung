@@ -16,6 +16,9 @@ Core System Classification Traditional Balinese Song
 
 AND YOU CAN RUN ALL Script, Following step by steep with number of instruction below:
 
+0. Cleaning Dataset
+    ```python .\00_preprocessing_dataset.py -i .\dataset-mentah\ -o .\audio\ -t 10 -d 5 -s 2```
+
 1. Copying all audio to folder dataset with Auto create class folder.
     ```python .\01_create_folder_dataset.py -i .\audio\ -o .\dataset\```
 

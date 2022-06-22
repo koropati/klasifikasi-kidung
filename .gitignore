@@ -1,5 +1,7 @@
 audio/*
 dataset/*
+backup/*
+dataset-mentah/*
 dataset-generate-feature/*
 dataset-spectogram/*
 model-kfold-validation/*

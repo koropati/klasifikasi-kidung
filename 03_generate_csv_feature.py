@@ -66,6 +66,13 @@ def generateCSVFeature(src, dst, methodFeature):
                 myLBP = LBP2(img_gray)
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
+            elif methodFeature == 'combine3':
+                myHOG = HOG(img_gray, 16, 8)
+                hogVector, _ = myHOG.extract()
+                vectorFeature.extend(hogVector)
+                myLBP = LBP2(img_gray)
+                lbpVector = myLBP.extract()
+                vectorFeature.extend(lbpVector)
             else:
                 myHOG = HOG(img_gray, 16, 8)
                 hogVector, _ = myHOG.extract()
