@@ -53,6 +53,7 @@ def generateCSVFeature(src, dst, methodFeature):
                 myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(16,16), cells_per_block=(1,1), visualize=False, feature_vector=True)
                 vectorFeature.extend(list(myHOG2))
             elif methodFeature == 'lbp':
+                # skip
                 myLBP = LBP(img_gray)
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
@@ -74,6 +75,7 @@ def generateCSVFeature(src, dst, methodFeature):
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
             else:
+                # skipp
                 myHOG = HOG(img_gray, 16, 8)
                 hogVector, _ = myHOG.extract()
                 vectorFeature.extend(hogVector)

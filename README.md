@@ -19,7 +19,7 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
 0. Cleaning Dataset
     ```python .\00_preprocessing_dataset.py -i .\dataset-mentah\ -o .\audio\ -t 10 -d 5 -s 2```
 
-1. Copying all audio to folder dataset with Auto create class folder.
+1.  Auto create class folder.
     ```python .\01_create_folder_dataset.py -i .\audio\ -o .\dataset\```
 
 2. Create Image Spectogram from Audio Dataset Folder.
@@ -32,13 +32,15 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog```
     * for HOG2 Feature (from scikit image):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog2```
-    * for LBP Feature:
+    * for LBP Feature (belum):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp```
     * for LBP2 Feature (from scikit image):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp2```
-    * for combine (HOG+LBP):
+    * for combine (HOG+LBP) (belum):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine```
     * for combine (HOG2+LBP2):
+    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
+    * for combine (HOG+LBP2):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
 
 3. Create KFold Validation
