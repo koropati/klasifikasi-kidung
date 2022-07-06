@@ -42,6 +42,8 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
     * for combine (HOG+LBP2):
     ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
+    * GLCM:
+    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m glcm```
 
 3. Create KFold Validation
     -f = kFold number

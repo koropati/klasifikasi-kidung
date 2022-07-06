@@ -7,6 +7,7 @@ import cv2
 from lib.hog import HOG
 from lib.lbp import LBP
 from lib.lbp2 import LBP2
+from lib.glcm import GLCM
 from lib.csv import appendListAsRow
 from skimage.feature import hog
 
@@ -74,6 +75,9 @@ def generateCSVFeature(src, dst, methodFeature):
                 myLBP = LBP2(img_gray)
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
+            elif methodFeature == 'glcm':
+                glcmVector = GLCM(img_gray).extract()
+                vectorFeature.extend(glcmVector)
             else:
                 # skipp
                 myHOG = HOG(img_gray, 16, 8)
