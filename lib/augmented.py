@@ -148,11 +148,11 @@ class Augmented(object):
         print("Writting... {}".format(outDir))
         sf.write(outDir, data, sr)
 
-        outDir, data, sr = self.shiftSilentToRight()
-        if os.path.exists(outDir):
-            os.remove(outDir)
-        print("Writting... {}".format(outDir))
-        sf.write(outDir, data, sr)
+        # outDir, data, sr = self.shiftSilentToRight()
+        # if os.path.exists(outDir):
+        #     os.remove(outDir)
+        # print("Writting... {}".format(outDir))
+        # sf.write(outDir, data, sr)
 
         outDir, data, sr = self.stretching()
         if os.path.exists(outDir):
