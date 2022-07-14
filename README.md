@@ -16,38 +16,41 @@ Core System Classification Traditional Balinese Song
 
 AND YOU CAN RUN ALL Script, Following step by steep with number of instruction below:
 
-0. Cleaning Dataset
-    ```python .\00_preprocessing_dataset.py -i .\dataset-mentah\ -o .\audio\ -t 10 -d 5 -s 2```
+1. Augmented Dataset
+    ```python .\01_augmented_dataset.py -i .\dataset-mentah\ -o .\dataset-with-augmented\```
 
-1.  Auto create class folder.
-    ```python .\01_create_folder_dataset.py -i .\audio\ -o .\dataset\```
+2. Cleaning Dataset
+    ```python .\02_preprocessing_dataset.py -i .\dataset-with-augmented\ -o .\audio\ -t 10 -d 5 -s 2```
 
-2. Create Image Spectogram from Audio Dataset Folder.
+3.  Auto create class folder.
+    ```python .\03_create_folder_dataset.py -i .\audio\ -o .\dataset\```
+
+4. Create Image Spectogram from Audio Dataset Folder.
     h: 432
     w: 576
-    ```python .\02_create_spectogram_dataset.py -i .\dataset\ -o .\dataset-spectogram\ -e png```
+    ```python .\04_create_spectogram_dataset.py -i .\dataset\ -o .\dataset-spectogram\ -e png```
 
-3. Generate Vector Feature by apply method ex: HOG, LBP or Both 
+5. Generate Vector Feature by apply method ex: HOG, LBP or Both 
     * for HOG Feature:
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog```
     * for HOG2 Feature (from scikit image):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog2```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog2```
     * for LBP Feature (belum):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp```
     * for LBP2 Feature (from scikit image):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp2```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m lbp2```
     * for combine (HOG+LBP) (belum):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine```
     * for combine (HOG2+LBP2):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
     * for combine (HOG+LBP2):
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine2```
-    * GLCM:
-    ```python .\03_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m glcm```
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m combine3```
+    * for GLCM:
+    ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m glcm```
 
 3. Create KFold Validation
     -f = kFold number
     -n = number of N Neighbors in KNN Classifier
     -o = distination of out folder to save excell report K-Fold Validation (optional) default : .\model-kfold-validation\
     -m = method extract feature (it is find file in folder .\dataset-generate-feature\ )
-    ```python .\04_model_kfold_validation.py -f 5 -n 5 -m hog```
+    ```python .\06_model_kfold_validation.py -f 5 -n 5 -m hog```

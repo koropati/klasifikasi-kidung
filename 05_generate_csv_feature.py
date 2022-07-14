@@ -7,7 +7,7 @@ import cv2
 from lib.hog import HOG
 from lib.lbp import LBP
 from lib.lbp2 import LBP2
-from lib.glcm import GLCM
+from lib.glcm import GLCM, GLCM2
 from lib.csv import appendListAsRow
 from skimage.feature import hog
 
@@ -43,7 +43,7 @@ def generateCSVFeature(src, dst, methodFeature):
             fullPathIn = root + os.sep + name
             classImage = name.split("_")[0]
 
-            # img_in = cv2.imread(fullPathIn)
+            img_colour = cv2.imread(fullPathIn)
             img_gray = cv2.imread(fullPathIn, cv2.IMREAD_GRAYSCALE)
 
             if methodFeature == 'hog':
@@ -51,7 +51,8 @@ def generateCSVFeature(src, dst, methodFeature):
                 hogVector, _ = myHOG.extract()
                 vectorFeature.extend(hogVector)
             elif methodFeature == 'hog2':
-                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(16,16), cells_per_block=(1,1), visualize=False, feature_vector=True)
+                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(
+                    16, 16), cells_per_block=(1, 1), visualize=False, feature_vector=True)
                 vectorFeature.extend(list(myHOG2))
             elif methodFeature == 'lbp':
                 # skip
@@ -63,7 +64,8 @@ def generateCSVFeature(src, dst, methodFeature):
                 lbpVector = myLBP.extract()
                 vectorFeature.extend(lbpVector)
             elif methodFeature == 'combine2':
-                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(16,16), cells_per_block=(1,1), visualize=False, feature_vector=True)
+                myHOG2 = hog(img_gray, orientations=8, pixels_per_cell=(
+                    16, 16), cells_per_block=(1, 1), visualize=False, feature_vector=True)
                 vectorFeature.extend(list(myHOG2))
                 myLBP = LBP2(img_gray)
                 lbpVector = myLBP.extract()
@@ -77,6 +79,9 @@ def generateCSVFeature(src, dst, methodFeature):
                 vectorFeature.extend(lbpVector)
             elif methodFeature == 'glcm':
                 glcmVector = GLCM(img_gray).extract()
+                vectorFeature.extend(glcmVector)
+            elif methodFeature == 'glcm2':
+                glcmVector = GLCM2(img_gray, img_colour).extract()
                 vectorFeature.extend(glcmVector)
             else:
                 # skipp

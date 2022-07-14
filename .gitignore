@@ -4,6 +4,7 @@ backup/*
 dataset-mentah/*
 dataset-generate-feature/*
 dataset-spectogram/*
+dataset-with-augmented/*
 model-kfold-validation/*
 lib/__pycache__
 myenv

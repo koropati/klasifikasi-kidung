@@ -3,8 +3,8 @@ import os
 
 from lib.preprocessing import CleanAudio
 
-# python 00_preprocessing_dataset.py 
-# python .\00_preprocessing_dataset.py -i .\dataset-mentah\ -o .\audio\ -t 10 -d 5 -s 2
+# python 02_preprocessing_dataset.py 
+# python .\02_preprocessing_dataset.py -i .\dataset-with-augmented\ -o .\audio\ -t 10 -d 5 -s 2
 
 def main():
     ap = argparse.ArgumentParser()
