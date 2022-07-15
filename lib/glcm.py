@@ -37,8 +37,8 @@ class GLCM2(object):
         self.norm = True
         self.props = ['dissimilarity', 'correlation',
                       'homogeneity', 'contrast', 'ASM', 'energy']
-        
-    def glcmFeature(self,img):
+
+    def glcmFeature(self, img):
         glcm = greycomatrix(img, distances=self.dists, angles=self.agls,
                             levels=self.lvl, symmetric=self.sym, normed=self.norm)
         feature = []
@@ -48,7 +48,7 @@ class GLCM2(object):
             feature.append(item)
         return feature
 
-    def splitFour(image):
+    def splitFour(self, image):
         (h, w) = image.shape[:2]
         (cX, cY) = (w // 2, h // 2)
         topLeft = image[0:cY, 0:cX]
@@ -71,9 +71,12 @@ class GLCM2(object):
         max_y = max(whitePtCoords[:, 0])
         max_x = max(whitePtCoords[:, 1])
 
-        colourImageCrop = cv2.resize(self.imgColour[min_y:max_y, min_x:max_x], (576,216), interpolation = cv2.INTER_AREA)
-        greyImageCrop = cv2.resize(self.img[min_y:max_y, min_x:max_x], (576,216), interpolation = cv2.INTER_AREA)
-        binerImageCrop = cv2.resize(maskingData[min_y:max_y, min_x:max_x], (576,216), interpolation = cv2.INTER_AREA)
+        colourImageCrop = cv2.resize(
+            self.imgColour[min_y:max_y, min_x:max_x], (576, 216), interpolation=cv2.INTER_AREA)
+        greyImageCrop = cv2.resize(
+            self.img[min_y:max_y, min_x:max_x], (576, 216), interpolation=cv2.INTER_AREA)
+        binerImageCrop = cv2.resize(
+            maskingData[min_y:max_y, min_x:max_x], (576, 216), interpolation=cv2.INTER_AREA)
         return colourImageCrop, greyImageCrop, binerImageCrop
 
     def meanHSV(self, colourImg):
@@ -82,8 +85,8 @@ class GLCM2(object):
         averageS = np.average(hsvImg[1])
         averagev = np.average(hsvImg[2])
         return [averageH, averageS, averagev]
-    
-    def binerFeature(img):
+
+    def binerFeature(self, img):
         return np.sum(img)
 
     def extract(self):
@@ -91,33 +94,27 @@ class GLCM2(object):
         featureHSV = []
         featureGLCM = []
         featureBiner = []
-        
+
         colour, grey, biner = self.cropOrangeFeature()
-        
+
         c1, c2, c3, c4 = self.splitFour(colour)
         g1, g2, g3, g4 = self.splitFour(grey)
         b1, b2, b3, b4 = self.splitFour(biner)
-        
-        
-        featureHSV.append(self.meanHSV(c1))
-        featureHSV.append(self.meanHSV(c2))
-        featureHSV.append(self.meanHSV(c3))
-        featureHSV.append(self.meanHSV(c4))
-        
-        featureGLCM.append(self.glcmFeature(g1))
-        featureGLCM.append(self.glcmFeature(g2))
-        featureGLCM.append(self.glcmFeature(g3))
-        featureGLCM.append(self.glcmFeature(g4))
-        
-        featureBiner.append(self.binerFeature(b1))
-        featureBiner.append(self.binerFeature(b2))
-        featureBiner.append(self.binerFeature(b3))
-        featureBiner.append(self.binerFeature(b4))
-        
-        combineFeature.append(featureGLCM)
-        combineFeature.append(featureHSV)
-        combineFeature.append(featureBiner)
-        
+
+        featureHSV.extend(self.meanHSV(c1))
+        featureHSV.extend(self.meanHSV(c2))
+        featureHSV.extend(self.meanHSV(c3))
+        featureHSV.extend(self.meanHSV(c4))
+
+        featureGLCM.extend(self.glcmFeature(g1))
+        featureGLCM.extend(self.glcmFeature(g2))
+        featureGLCM.extend(self.glcmFeature(g3))
+        featureGLCM.extend(self.glcmFeature(g4))
+
+        featureBiner.extend([self.binerFeature(b1), self.binerFeature(b2), self.binerFeature(b3), self.binerFeature(b4)])
+
+        combineFeature.extend(featureGLCM)
+        combineFeature.extend(featureHSV)
+        combineFeature.extend(featureBiner)
+
         return combineFeature
-        
-        
