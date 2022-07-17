@@ -14,6 +14,8 @@ class CleanAudio(object):
         self.shiftDistance = shiftDistance  # in second
         self.className = audioInputPath.split("\\")[-1].split(".")[0]
         self.counterLabel = 1
+        self.bufferTimeDuration = self.duration * self.sr # set panjang music = durasi (detik) X sample rate (Hz)
+        self.bufferSiftDistance = self.shiftDistance * self.sr # set panjang sift distance = durasi (detik) X sample rate (Hz)
 
     def extract(self):
         # remove all silent with treshold value
@@ -26,7 +28,7 @@ class CleanAudio(object):
             wav_data.extend(data)
 
         # split to n second duration with shiftDistance duration
-        lengthDuration = librosa.get_duration(y=np.array(wav_data), sr=self.sr)
+        lengthDuration = librosa.get_duration(y=np.array(wav_data), sr=self.sr) #return duration in seconds
 
         loopingLength = int(((self.duration * ((int(lengthDuration) /
                             self.duration)-1)) + self.shiftDistance)/self.shiftDistance)
@@ -37,30 +39,30 @@ class CleanAudio(object):
                 self.className + str(self.counterLabel) + ".wav"
             print("OUTPUT: {}".format(outPath))
             print("Indext Start: {}".format(int(indexStart)))
-            print("Indext End: {}".format(int(indexStart+(self.duration*1000))))
+            print("Indext End: {}".format(int(indexStart+self.bufferTimeDuration)))
             split_audio = wav_data[int(indexStart):int(
-                indexStart+(self.duration*1000))]
+                indexStart+self.bufferTimeDuration)]
             if os.path.exists(outPath):
                 os.remove(outPath)
             sf.write(outPath, split_audio, self.sr)
             # librosa.output.write_wav(outPath, split_audio, self.sr)
-            indexStart += self.shiftDistance * 1000
+            indexStart += self.bufferSiftDistance
             self.counterLabel += 1
 
         # memotong dari belakang ke depan
-        indexEnd = lengthDuration * 1000
+        indexEnd = lengthDuration * self.sr
         for i in range(loopingLength):
             outPath = self.audioOutputDir + "\\" + \
                 self.className + str(self.counterLabel) + ".wav"
             print("OUTPUT: {}".format(outPath))
             print("Indext Start: {}".format(
-                int((indexEnd-(self.duration*1000)))))
+                int((indexEnd-self.bufferTimeDuration))))
             print("Indext End: {}".format(int(indexEnd)))
             split_audio = wav_data[int(
-                (indexEnd-(self.duration*1000))):int(indexEnd)]
+                (indexEnd-self.bufferTimeDuration)):int(indexEnd)]
             if os.path.exists(outPath):
                 os.remove(outPath)
             sf.write(outPath, split_audio, self.sr)
             # librosa.output.write_wav(outPath, split_audio, self.sr)
-            indexEnd -= self.shiftDistance * 1000
+            indexEnd -= self.bufferSiftDistance
             self.counterLabel += 1
