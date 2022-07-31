@@ -30,7 +30,7 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
     w: 576
     ```python .\04_create_spectogram_dataset.py -i .\dataset\ -o .\dataset-spectogram\ -e png```
 
-4. Create Image Spectogram from Audio Dataset Folder.
+4. Create Image Spectogram crop by ROI from Audio Dataset Folder.
     h: 432
     w: 576
     ```python .\04_crop_spectogram_dataset.py -i .\dataset-spectogram\ -o .\dataset-spectogram-croped\ -e png```
