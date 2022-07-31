@@ -6,5 +6,6 @@ dataset-generate-feature/*
 dataset-spectogram/*
 dataset-with-augmented/*
 model-kfold-validation/*
+dataset-spectogram-croped/*
 lib/__pycache__
 myenv

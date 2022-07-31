@@ -30,6 +30,11 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
     w: 576
     ```python .\04_create_spectogram_dataset.py -i .\dataset\ -o .\dataset-spectogram\ -e png```
 
+4. Create Image Spectogram from Audio Dataset Folder.
+    h: 432
+    w: 576
+    ```python .\04_crop_spectogram_dataset.py -i .\dataset-spectogram\ -o .\dataset-spectogram-croped\ -e png```
+
 5. Generate Vector Feature by apply method ex: HOG, LBP or Both 
     * for HOG Feature:
     ```python .\05_generate_csv_feature.py -i .\dataset-spectogram\ -o .\dataset-generate-feature\ -m hog```
@@ -56,3 +61,10 @@ AND YOU CAN RUN ALL Script, Following step by steep with number of instruction b
     -o = distination of out folder to save excell report K-Fold Validation (optional) default : .\model-kfold-validation\
     -m = method extract feature (it is find file in folder .\dataset-generate-feature\ )
     ```python .\06_model_kfold_validation.py -f 5 -n 5 -m hog```
+
+4. Create KFold Validation using Selected feature
+    -f = kFold number
+    -n = number of N Neighbors in KNN Classifier
+    -o = distination of out folder to save excell report K-Fold Validation (optional) default : .\model-kfold-validation\
+    -m = method extract feature (it is find file in folder .\dataset-generate-feature\ )
+    ```python .\07_model_feature_selection_kfold_validation.py -f 5 -n 5 -m glcm2```
