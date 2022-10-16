@@ -5,6 +5,9 @@ dataset-mentah/*
 dataset-generate-feature/*
 dataset-spectogram/*
 dataset-with-augmented/*
+dataset-split/*
+model-data/*
+model-report/*
 model-kfold-validation/*
 dataset-spectogram-croped/*
 lib/__pycache__

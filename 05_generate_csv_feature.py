@@ -3,6 +3,7 @@ import os
 from pydoc import classname
 import shutil
 import cv2
+import numpy as np
 
 from lib.hog import HOG
 from lib.lbp import LBP
@@ -83,6 +84,30 @@ def generateCSVFeature(src, dst, methodFeature):
             elif methodFeature == 'glcm2':
                 glcmVector = GLCM2(img_gray, img_colour).extract()
                 vectorFeature.extend(glcmVector)
+            elif methodFeature == 'combine4':
+                myHOG = HOG(img_gray, 16, 8)
+                hogVector, _ = myHOG.extract()
+                vectorFeature.extend(hogVector)
+                glcmVector = GLCM2(img_gray, img_colour).extract()
+                vectorFeature.extend(glcmVector)
+            elif methodFeature == 'combine5':
+                myLBP = LBP2(img_gray)
+                lbpVector = myLBP.extract()
+                vectorFeature.extend(lbpVector)
+                glcmVector = GLCM2(img_gray, img_colour).extract()
+                vectorFeature.extend(glcmVector)
+            elif methodFeature == 'combine6':
+                myHOG = HOG(img_gray, 16, 8)
+                hogVector, _ = myHOG.extract()
+                vectorFeature.extend(hogVector)
+                glcmVector = GLCM(img_gray).extract()
+                vectorFeature.extend(glcmVector)
+            elif methodFeature == 'combine7':
+                myLBP = LBP2(img_gray)
+                lbpVector = myLBP.extract()
+                vectorFeature.extend(lbpVector)
+                glcmVector = GLCM(img_gray).extract()
+                vectorFeature.extend(glcmVector)
             else:
                 # skipp
                 myHOG = HOG(img_gray, 16, 8)
@@ -94,6 +119,8 @@ def generateCSVFeature(src, dst, methodFeature):
             print("Processed : {}".format(fullPathIn))
             appendListAsRow(nameFileOut, vectorFeature)
             appendListAsRow(nameFileLabelOut, [classImage])
+    featureSize=len(vectorFeature)
+    print(featureSize)
     print("Done!")
 
 if __name__ == '__main__':
